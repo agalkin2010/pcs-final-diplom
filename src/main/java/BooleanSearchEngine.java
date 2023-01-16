@@ -18,10 +18,12 @@ public class BooleanSearchEngine implements SearchEngine {
         String text;
         String[] words;
         String fileName;
+        String absFileName;
 
         for (File file : folder.listFiles()) {
             fileName = file.getName();
-            var doc = new PdfDocument(new PdfReader(pdfsDir + "\\" + fileName));
+            absFileName = file.getAbsolutePath();
+            var doc = new PdfDocument(new PdfReader(absFileName));
             for (int i = 1; i <= doc.getNumberOfPages(); i++) {
                 var page = doc.getPage(i);
                 text = PdfTextExtractor.getTextFromPage(page);
